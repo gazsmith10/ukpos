@@ -1,0 +1,3 @@
+Name,Allows_Weekdays,Allows_Saturday,Allows_Sunday,Days_After_Dispatch
+Standard Delivery,Yes,No,No,3
+Express Delivery,Yes,Yes,Yes,1
