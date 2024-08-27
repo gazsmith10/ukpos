@@ -61,7 +61,7 @@ class DeliveryCalculator
                          ($dayOfWeek == 6 && $this->dispatchSaturday) || 
                          ($dayOfWeek == 7 && $this->dispatchSunday);
 
-        echo "Checking if dispatch day: {$date->format('Y-m-d')} - Dispatch allowed: " . ($isDispatchDay ? 'Yes' : 'No') . "<br>";
+        // echo "Checking if dispatch day: {$date->format('Y-m-d')} - Dispatch allowed: " . ($isDispatchDay ? 'Yes' : 'No') . "<br>";
         
         return $isDispatchDay;
     }
