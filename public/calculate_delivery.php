@@ -36,4 +36,6 @@ $calculator = new DeliveryCalculator(
 // calculate earliest delivery date
 $earliestDeliveryDate = $calculator->calculateEarliestDeliveryDate($orderDate, $cutoffTime, $selectedMethod);
 
-echo "Earliest Delivery Date: " . htmlspecialchars($earliestDeliveryDate);
+$earliestDeliveryDateUK = (new DateTime($earliestDeliveryDate))->format('d/m/Y');
+
+echo "Earliest Delivery Date: " . htmlspecialchars($earliestDeliveryDateUK);
