@@ -9,13 +9,13 @@
     
     calculate_delivery.php: Processes the form submission and calculates the delivery date.
     
-    delivery_methods.csv: Defines different delivery methods and their rules.
-    
     dispatch_exceptions.txt: Lists dates when the warehouse doesnt dispatch orders.
     
     delivery_exceptions.txt: Lists dates when deliveries cant be made.
 
     warehouse_dispatch.csv: Defines settings for Warehouse Dispatch.
+
+    delivery_methods.csv: Defines different delivery methods and their rules.
 
 **Updating Delivery Methods**
 
@@ -26,4 +26,8 @@
     Allows_Saturday: "Yes" or "No".
     Allows_Sunday: "Yes" or "No".
     Days_After_Dispatch: How many days after dispatch delivery will occur.
+    Cutoff_Time: 24hour time for cutoff
 
+Pull the repo and run composer install 
+
+**PHP version 8.2**
