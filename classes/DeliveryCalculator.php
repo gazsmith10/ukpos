@@ -21,14 +21,17 @@ class DeliveryCalculator
 
     public function calculateEarliestDeliveryDate(\DateTime $orderDate, \DateTime $cutoffTime, DeliveryMethod $method)
     {
-        if ($orderDate->format('H:i') > $cutoffTime->format('H:i')) {
+        $methodCutoffTime = new \DateTime($method->cutoffTime);
+
+        // Adjust order date based on method's cutoff time
+        if ($orderDate->format('H:i') > $methodCutoffTime->format('H:i')) {
             $orderDate->modify('+1 day');
         }
 
-        // find the next valid dispatch date
+        // Find the next valid dispatch date
         $dispatchDate = $this->getNextValidDispatchDate(clone $orderDate);
 
-        // find the next valid delivery date
+        // Find the next valid delivery date
         $deliveryDate = $this->getNextValidDeliveryDate(clone $dispatchDate, $method);
 
         return $deliveryDate->format('Y-m-d');
@@ -58,11 +61,11 @@ class DeliveryCalculator
                          ($dayOfWeek == 6 && $this->dispatchSaturday) || 
                          ($dayOfWeek == 7 && $this->dispatchSunday);
 
-        // echo "Checking if dispatch day: {$date->format('Y-m-d')} - Dispatch allowed: " . ($isDispatchDay ? 'Yes' : 'No') . "<br>";
+        echo "Checking if dispatch day: {$date->format('Y-m-d')} - Dispatch allowed: " . ($isDispatchDay ? 'Yes' : 'No') . "<br>";
         
         return $isDispatchDay;
     }
-    
+
     private function isDeliveryDay(\DateTime $date, DeliveryMethod $method)
     {
         $dayOfWeek = $date->format('N'); // 1 (Monday) to 7 (Sunday)

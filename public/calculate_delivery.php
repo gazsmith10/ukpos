@@ -11,15 +11,18 @@ $warehouseDispatchData = CsvParser::parse('../warehouse_dispatch.csv');
 
 // get the form data
 $orderDateInput = $_POST['order-date'] ?? '';
-$cutoffTimeInput = $_POST['cutoff-time'] ?? '';
+$orderTimeInput = $_POST['order-time'] ?? ''; 
 $deliveryMethodName = $_POST['delivery-method'] ?? '';
 
-if (empty($orderDateInput) || empty($cutoffTimeInput) || empty($deliveryMethodName)) {
+if (empty($orderDateInput) || empty($orderTimeInput) || empty($deliveryMethodName)) {
     echo "Error: Missing required form data.";
     exit;
 }
 
-// ind selected delivery method
+// bombine date and time for the order datetime
+$orderDateTime = new DateTime($orderDateInput . ' ' . $orderTimeInput);
+
+// find selected delivery method
 $selectedMethodData = array_filter($deliveryMethodsData, function ($method) use ($deliveryMethodName) {
     return $method['Name'] === $deliveryMethodName;
 });
@@ -37,10 +40,7 @@ foreach ($warehouseDispatchData as $rule) {
     }
 }
 
-$orderDate = new DateTime($orderDateInput);
-$cutoffTime = new DateTime($cutoffTimeInput);
-
-// pass file paths to the DeliveryCalculator class
+// pass data to the DeliveryCalculator class
 $calculator = new DeliveryCalculator(
     file('../dispatch_exceptions.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES),
     file('../delivery_exceptions.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES),
@@ -50,9 +50,8 @@ $calculator = new DeliveryCalculator(
 );
 
 // calculate earliest delivery date
-$earliestDeliveryDate = $calculator->calculateEarliestDeliveryDate($orderDate, $cutoffTime, $selectedMethod);
+$earliestDeliveryDate = $calculator->calculateEarliestDeliveryDate($orderDateTime, new DateTime($selectedMethod->cutoffTime), $selectedMethod);
 
-// format the date in UK format (DD/MM/YYYY)
 $earliestDeliveryDateUK = (new DateTime($earliestDeliveryDate))->format('d/m/Y');
 
 echo "Earliest Delivery Date: " . htmlspecialchars($earliestDeliveryDateUK);

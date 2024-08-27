@@ -9,6 +9,7 @@ class DeliveryMethod
     public $allowsSaturday;
     public $allowsSunday;
     public $daysAfterDispatch;
+    public $cutoffTime; 
 
     public function __construct($data)
     {
@@ -17,5 +18,6 @@ class DeliveryMethod
         $this->allowsSaturday = $data['Allows_Saturday'] === 'Yes';
         $this->allowsSunday = $data['Allows_Sunday'] === 'Yes';
         $this->daysAfterDispatch = (int)$data['Days_After_Dispatch'];
+        $this->cutoffTime = $data['Cutoff_Time'];
     }
 }

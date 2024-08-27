@@ -17,8 +17,8 @@ require_once '../vendor/autoload.php';
         <label for="order-date">Order Date:</label>
         <input type="date" id="order-date" name="order-date" required>
         
-        <label for="cutoff-time">Cutoff Time (24-hour format):</label>
-        <input type="time" id="cutoff-time" name="cutoff-time" required>
+        <label for="order-time">Order Time (24-hour format):</label>
+        <input type="time" id="order-time" name="order-time" required>
         
         <label for="delivery-method">Delivery Method:</label>
         <select id="delivery-method" name="delivery-method" required>
@@ -35,6 +35,7 @@ require_once '../vendor/autoload.php';
         <button type="submit">Calculate Earliest Delivery Date</button>
     </form>
     
-    <div id="result"></div>
+    <div id="result">
+    </div>
 </body>
 </html>
