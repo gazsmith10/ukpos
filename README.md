@@ -15,6 +15,8 @@
     
     delivery_exceptions.txt: Lists dates when deliveries cant be made.
 
+    warehouse_dispatch.csv: Defines settings for Warehouse Dispatch.
+
 **Updating Delivery Methods**
 
     delivery_methods.csv this file contains delivery method details and each row represents a delivery method. 
