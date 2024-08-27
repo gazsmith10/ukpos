@@ -28,3 +28,4 @@
     Days_After_Dispatch: How many days after dispatch delivery will occur.
     Cutoff_Time: 24hour time for cutoff
 
+Pull the repo and run composer install - **PHP version 8.2**
